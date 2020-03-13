@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <title>cszp Easy soccer execution program WIKI</title>
+    <meta http-equiv="content-type" charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert&lang=bash"></script>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../style.css"/>
+</head>
+
+<body>
+<div id="page">
+    <div class="page_title">
+        <h1 class="title-h1">cszp Easy soccer execution program WIKI</h1>
+        <h2 class="description">robocup2Dシュミレーションリーグの自動実行プログラムのwikiです。</h2>
+    </div>
+    <div class="left">
+        <h2>インストール</h2>
+        <p>まずはインストールをしなければ始まらないのでインストールをしていきましょう。<br>インストール方法はとてもかんたんです。</p>
+        <h3 class="checkdiv"><span class="divtitle">POINT</span>このプログラムはLinux(Debian系)用のプログラムです。<br>RedHat系のOSの場合は動かない可能性がありますので注意してください。</h3>
+        <h3 class="midasi">1.インストールに必要なライブラリをインストール</h3>
+        <p>cszpにはインストールに必要なライブラリがあります。少ないかと思いますが、インストールプログラムがあとで追加のライブラリをインストールします。</p>
+        <pre class="prettyprint linenums" style="font-size: 18px;">
+pip3 install cuitools</pre>
+        <p>上のコマンドを実行してcuitoolsをインストールしてください。</p>
+        <h3 class="midasi">2.プログラムをダウンロード</h3>
+        <div class="checkdiv">
+            <span class="divtitle">POINT</span>
+            <p>今回はgitを使うので、もしgitをインストールしていなければ下のコマンドでインストールをしてください。</p>
+            <pre class="prettyprint linenums" style="font-size: 18px;">
+sudo apt install git</pre><br>
+        </div>
+        <p>下のコマンドでプログラムをダウンロードします。</p>
+        <pre class="prettyprint linenums" style="font-size: 18px;">
+git clone https://github.com/kumitatepazuru/cszp.git</pre><br>
+        <p>ダウンロードができたら、作業ディレクトリをダウンロードしたディレクトリにしてください。</p>
+        <h3 class="midasi">3-1.インストールをする　〜言語選択〜</h3>
+        <p>最初にも言いましたがインストール方法はとてもかんたんです。下のコマンドを実行すると、下の画像のようなものが出てくるはずです。</p>
+        <pre class="prettyprint linenums" style="font-size: 18px;">
+sudo python3 install.py</pre>
+        <img src="install1.png" width=100% vspace="10">
+        <p>これは言語設定なのでどちらかを選んでください。ちなみに僕は日本語(ja_jp)を選びました。</p>
+        <h3 class="midasi">3-2.インストールをする　〜必要ライブラリのインストール〜</h3>
+        <img src="./install2.png" width=100% vspace="10">
+        <p>次はライブラリのインストールです。ここではいを選択すると、必要なライブラリがすべてインストールされます。<br>その次の画面はよく確認してはいを選択してください。</p>
+        <div class="checkdiv"><span class="divtitle">POINT</span>pyenvなどのpython仮想環境など標準のpython以外で実行をしている場合はいいえを選択してください。<br>また、その次の画面でインストールしなくては行けないプログラムが表示されるのでaptはfiglet、pipはrequirements.txtの中をインストールしてください。<img src="install3.png" width=100% vspace="10"></div>
+        <h3 class="midasi">3-2.インストールをする　〜インストールの場所の選択〜</h3>
+        <img src="./install4.png" width=100% vspace="10">
+        <p>インストールのパスを入力して終了です。インストールが成功したら、下のような画面が出ます。そうしたら、終了です。</p>
+        <img src="install5.png" width=100% vspace="10">
+        <p>こんな感じでインストールは終了です。次はcszpの基本的な使い方について説明していきたいと思います。</p>
+    </div>
+
+    <div class="right">
+        <ul>
+            <li><a href="./index.html">ホーム</a></li>
+            <li><a href="./install.html">インストール</a></li>
+            <li><a href="./plugin1.html">プラグインの作り方</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+
+</html>
