@@ -68,11 +68,19 @@
         </ul>
         <p>こんな感じです。</p>
         <h3 class="midasi">__init__.py</h3>
-        <p>この中のplugin関数が呼び出されます。これもルートディレクトリの直下に作成します。実際の呼び出しコマンドは</p>
+        <p>この中のplugin関数（クラス）が呼び出されます。<br>引数に（引数の名前は例です）</p>
+        <ul>
+            <li>lang : cszp_langクラスのデータです。主にlang.langのlangファイルからの翻訳に使われます。</li>
+            <li>input_cmd : ユーザーが指定したコマンドを使います。違うコマンドを指定しても呼ばれるのはいつもplugin関数(クラス）なので判別するのに使えると思います。</li>
+        </ul>
+        <p>を指定してください。<br>これもルートディレクトリの直下に作成します。実際の呼び出しコマンドは</p>
         <pre class="prettyprint linenums" style="font-size: 18px;">
-plugin = import_module(lang.functo("****", inp))
-plugin.plugin()</pre>
-        <p>です。</p>
+sys.path.append(lang.functo("menu", inp)[0])
+plugin = import_module(lang.functo("menu", inp)[1])
+reload(plugin)
+try:
+    plugin.plugin(lang,inp)</pre>
+        <p>です。※メニュープラグインの場合</p>
         <h3 class="midasi">en_us.langとja_jp.lang</h3>
         <p>言語ファイルです。poファイルと構造が似ています。<br>このプログラムはルートディレクトリではなくルートディレクトリ内のlanguageディレクトリに作成します。<br>lang.lang()関数で認識されます。</p>
         <p>書き方はとてもかんたんです。例としてはこのような感じです。</p>
