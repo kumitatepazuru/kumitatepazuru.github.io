@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>cszp Easy soccer execution program WIKI</title>
+        <title>cszp Easy soccer execution program WIKI | home</title>
         <meta http-equiv="content-type" charset="utf-8">
         <link href="https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
@@ -18,10 +18,19 @@
         <div class="left">
             <h3>cszp Easy soccer execution program WIKIへようこそ</h3>
             <h3 class="title">リンク集</h3>
-            <ul>
-                <li><a href="../index.html">自分用ブログ</a></li>
-                <li><a href="https://github.com/kumitatepazuru">Github</a></li>
-            </ul>
+            <div id="link">
+                <script>
+                    var text1 = "<ul>"
+                    $.getJSON('../link.json') // json読み込み開始
+                        .done(function(json){ // jsonの読み込みに成功した時
+                            for(i=0;i<json.length;i++){
+                                text1 += "<li><a href='"+json[i].link+"'>"+json[i].text+"</a></li>"
+                            }
+                            text1 += "</ul>"
+                            document.getElementById("link").innerHTML = text1;
+                        });
+                </script>
+            </div>
             <h3 class="title">目次</h3>
             <div id="content"></div>
             <script>

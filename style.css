@@ -36,6 +36,38 @@ ul li {
   list-style-type: none!important;
 }
 
+table th {/*table内のthに対して*/
+  padding: 10px;/*上下左右10pxずつ*/
+  color: #FF9800;/*文字色*/
+  background: #fff5e5;/*背景色*/
+}
+
+table td {/*table内のtdに対して*/
+  padding: 3px 10px;/*上下3pxで左右10px*/
+}
+
+table {
+  border-collapse: collapse;
+  border: solid 2px orange;/*表全体を線で囲う*/
+  font-size: 20px;
+}
+table th, table td {
+  border: dashed 1px orange;/**/
+  /*破線 1px オレンジ*/
+}
+
+#date::before{
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f783";
+}
+
+#info::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f129";
+}
+
 ul li:before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
