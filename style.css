@@ -93,10 +93,9 @@ a:visited {
   width:980px;
 }
 
-.right {
+#right {
     width:220px;
     float:right;
-
 }
 
 #page{

@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert&lang=json"></script>
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../style.css"/>
 </head>
 
@@ -67,6 +68,11 @@
             <li>cmd : 実際のコマンドです。これが入力されるとその指定のプログラム内のplugin関数が呼び出されます。</li>
         </ul>
         <p>こんな感じです。</p>
+        <div class="checkdiv"><span class="divtitle">POINT</span><h4 style="margin: 10px 0px;">cszp起動時の動作について(ver 4.1.10から)</h4><p>list.jsonに以下のようなプログラムを入力すると、cszpの起動時に、次に説明する__init__.pyのautostart関数（クラス）が呼ばれるようになります。初期設定はこちらで設定すると良いでしょう。</p>
+            <pre class="prettyprint linenums" style="font-size: 18px;">
+"auto_start":[
+    {"cmd": "auto_start"}
+]</pre></div>
         <h3 class="midasi">__init__.py</h3>
         <p>この中のplugin関数（クラス）が呼び出されます。<br>引数に（引数の名前は例です）</p>
         <ul>
@@ -106,12 +112,18 @@ Play multiple matchs</pre>
         <div class="checkdiv"><span class="divtitle">POINT</span><p>もし、同じ文字列だとしても書いてください。一応そのような書き方は可能ですが、非推奨です。<br>そもそもその機能はエラー回避のために作成した機能です。<br>作成者的にはプログラム的にどうかと思います。<br>また、翻訳したい言語をそもそも作成しないことも可能ですが上記の理由により、オススメしません。</p></div>
         <p>これでプラグインの作り方はマスターですw次はプラグインでインストール無しで使える標準コマンドを紹介します。</p>
     </div>
-<div class="right">
-        <ul>
-            <li><a href="./index.html">ホーム</a></li>
-            <li><a href="./install.html">インストール</a></li>
-            <li><a href="./plugin1.html">プラグインの作り方</a></li>
-        </ul>
+    <div id="right">
+        <script>
+            var text = "<ul>"
+            $.getJSON('./content.json') // json読み込み開始
+                .done(function(json){ // jsonの読み込みに成功した時
+                    for(i=0;i<json.length;i++){
+                        text += "<li><a href='"+json[i].link+"'>"+json[i].text+"</a></li>"
+                    }
+                    text += "</ul>"
+                    document.getElementById("right").innerHTML = text;
+                });
+        </script>
     </div>
 </body>
 
