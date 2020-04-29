@@ -22,7 +22,7 @@
             <div id="link">
                 <script>
                     var text = "<ul>"
-                    $.getJSON('./link.json') // json読み込み開始
+                    $.getJSON('https://kumitatepazuru.github.io/link.json') // json読み込み開始
                         .done(function(json){ // jsonの読み込みに成功した時
                             for(i=0;i<json.length;i++){
                                 text += "<li><a href='"+json[i].link+"'>"+json[i].text+"</a></li>"
