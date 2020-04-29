@@ -19,7 +19,7 @@
     font-size: 13px;
 }
 
-.h3 {
+h3 {
   font-family: 'Noto Sans JP', sans-serif;
 }
 
@@ -131,6 +131,7 @@ a:visited {
 }
 
 #page{
+   overflow-wrap: break-word;
     width: 980px;
     margin: 0 auto;
     margin-top: 10px;
