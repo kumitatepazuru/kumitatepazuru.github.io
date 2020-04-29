@@ -131,7 +131,8 @@ a:visited {
 }
 
 #page{
-   overflow-wrap: break-word;
+    font-size: 17px;
+    overflow-wrap: break-word;
     width: 980px;
     margin: 0 auto;
     margin-top: 10px;
