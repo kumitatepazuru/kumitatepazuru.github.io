@@ -9,6 +9,9 @@ from http.server import BaseHTTPRequestHandler
 import wx
 import wx.richtext
 import wx.html2
+import wx._adv
+import wx._html
+import wx._xml
 import re
 from wx import stc
 import wx.lib.mixins.listctrl as listmix
@@ -111,6 +114,8 @@ class convert(wx.Frame):
 
     def generate_html(self, _):
         soup = BeautifulSoup(open("index2.html").read(), 'html.parser')
+        nt = BeautifulSoup("<h2>" + self.parent.title.GetValue() + "</h2>", 'html.parser')
+        soup.select(".left")[0].append(nt)
         nt = BeautifulSoup(self.parent.text.GetValue(), 'html.parser')
         # print(nt)
         f = os.path.splitext(os.path.basename(self.file.GetValue()))[0]
@@ -515,6 +520,8 @@ class MyBrowser(wx.Frame):
 
     def save(self, _):
         soup = BeautifulSoup(open("index.html").read(), 'html.parser')
+        nt = BeautifulSoup("<h2>" + self.title.GetValue() + "</h2>", 'html.parser')
+        soup.select(".left")[0].append(nt)
         nt = BeautifulSoup(self.text.GetValue(), 'html.parser')
         soup.select(".left")[0].append(nt)
         if file_path == "":
@@ -536,17 +543,21 @@ class MyBrowser(wx.Frame):
             try:
                 with open(dialog.GetPath(), "r") as f:
                     soup = BeautifulSoup(f.read(), 'html.parser')
+                font = wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
+                self.title.SetFont(font)
+                self.title.SetForegroundColour(self.default_color)
+                self.title.SetValue(soup.find("h2").getText())
+                soup.find("h2").decompose()
                 self.text.SetValue("".join(map(lambda n: str(n), soup.select(".left")[0].contents)))
-            except IndexError:
-                pass
+            except (IndexError,AttributeError):
+                self.text.SetValue("")
             else:
                 file_path = dialog.GetPath()
 
     def img(self, _):
         dialog = wx.FileDialog(None, '画像の選択', style=wx.FD_OPEN,
                                wildcard="All Files (*.*)|*")
-        dialog.ShowModal()
-        if os.path.isfile(dialog.GetPath()):
+        if dialog.ShowModel() == wx.ID_OK:
             self.text.Replace(self.text.GetSelection()[0], self.text.GetSelection()[1],
                               "<img src='" + dialog.GetPath() + "' width=100% vspace='10'>" + self.text.GetStringSelection())
 
