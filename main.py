@@ -67,6 +67,42 @@ th.setDaemon(True)
 th.start()
 
 
+class midasi(wx.Frame):
+    def __init__(self, parent):
+        self.parent = parent
+        self.parent.Hide()
+        wx.Frame.__init__(self, parent, -1, "注意文の作成", size=(500, 150),
+                          style=wx.DEFAULT_FRAME_STYLE & ~(wx.RESIZE_BORDER | wx.MAXIMIZE_BOX))
+        self.SetIcon(wx.Icon("icon.ico", wx.BITMAP_TYPE_ICO))
+        self.Bind(wx.EVT_CLOSE, self.close)
+        sizer1 = wx.BoxSizer(wx.VERTICAL)
+        sizer2 = wx.BoxSizer(wx.HORIZONTAL)
+        self.text1 = wx.StaticText(self, wx.ID_ANY, 'タイトル')
+        self.title = wx.TextCtrl(self, -1)
+        self.button = wx.Button(self, wx.ID_ANY, '注意文を作成')
+        self.button.Bind(wx.EVT_BUTTON, self.midasi_generate)
+        sizer2.Add(self.text1, proportion=1, flag=wx.GROW)
+        sizer2.Add(self.title, proportion=1, flag=wx.GROW)
+        sizer1.Add(sizer2, flag=wx.GROW)
+        sizer1.Add(self.button, flag=wx.GROW | wx.TOP, border=10)
+        self.SetSizer(sizer1)
+        if self.parent.text.GetStringSelection() != "":
+            self.title.SetValue(self.parent.text.GetStringSelection())
+
+    def close(self, _):
+        self.Destroy()
+        self.parent.Show()
+
+    def midasi_generate(self, _):
+        if self.title.GetValue() == "":
+            wx.MessageBox('タイトルを入力してください', '注意文の作成')
+        else:
+            self.parent.text.Replace(self.parent.text.GetSelection()[0], self.parent.text.GetSelection()[1],
+                                     "<h3 class='midasi'>\n\t" + self.title.GetValue() +
+                                     "</h3>")
+            self.close(None)
+
+
 class Saveok(wx.Frame):
     def __init__(self, parent, name):
         self.parent = parent
@@ -364,10 +400,8 @@ class MyBrowser(wx.Frame):
         self.button1.Bind(wx.EVT_BUTTON, self.link)
         self.combobox_2 = wx.ComboBox(self, wx.ID_ANY, '表・リスト', choices=("表の作成", "リストの作成"), style=wx.CB_DROPDOWN)
         self.combobox_2.Bind(wx.EVT_COMBOBOX, self.create_list)
-        self.button4 = wx.Button(self, wx.ID_ANY, '注意文の作成')
-        self.button4.Bind(wx.EVT_BUTTON, self.point)
-        self.button5 = wx.Button(self, wx.ID_ANY, 'コード文の作成')
-        self.button5.Bind(wx.EVT_BUTTON, self.code)
+        self.combobox_3 = wx.ComboBox(self, wx.ID_ANY, '注意文・コード文', choices=("注意文の作成", "コード文の作成"), style=wx.CB_DROPDOWN)
+        self.combobox_3.Bind(wx.EVT_COMBOBOX, self.create_list)
         self.button6 = wx.Button(self, wx.ID_ANY, 'ファイルの保存')
         self.button6.Bind(wx.EVT_BUTTON, self.save)
         self.button7 = wx.Button(self, wx.ID_ANY, 'ファイルを開く')
@@ -376,10 +410,12 @@ class MyBrowser(wx.Frame):
         self.button8.Bind(wx.EVT_BUTTON, self.img)
         self.button9 = wx.Button(self, wx.ID_ANY, '公開をする')
         self.button9.Bind(wx.EVT_BUTTON, self.convert)
+        self.button10 = wx.Button(self, wx.ID_ANY, '見出しの作成')
+        self.button10.Bind(wx.EVT_BUTTON, self.midasi)
         self.text1 = wx.StaticText(self, wx.ID_ANY, '拡大率')
         self.zoom = wx.ComboBox(self, wx.ID_ANY, "MEDIUM", choices=("TINY", "SMALL", "MEDIUM", "LARGE", "LARGEST"),
                                 style=wx.CB_READONLY)
-        self.zoom.Bind(wx.EVT_COMBOBOX, self.change_zoom)
+        self.zoom.Bind(wx.EVT_COMBOBOX, self.change_text)
         zoom.Add(self.text1, proportion=1, flag=wx.GROW)
         zoom.Add(self.zoom, proportion=5, flag=wx.GROW)
 
@@ -387,9 +423,9 @@ class MyBrowser(wx.Frame):
         menu.Add(self.combobox_1, proportion=1, flag=wx.GROW | wx.TOP, border=10)
         menu.Add(self.button1, proportion=1, flag=wx.GROW | wx.TOP, border=10)
         menu.Add(self.combobox_2, proportion=1, flag=wx.GROW | wx.TOP, border=10)
-        menu.Add(self.button4, proportion=1, flag=wx.GROW | wx.TOP, border=10)
-        menu.Add(self.button5, proportion=1, flag=wx.GROW | wx.TOP, border=10)
+        menu.Add(self.combobox_3, proportion=1, flag=wx.GROW | wx.TOP, border=10)
         menu.Add(self.button8, proportion=1, flag=wx.GROW | wx.TOP, border=10)
+        menu.Add(self.button10, proportion=1, flag=wx.GROW | wx.TOP, border=10)
 
         file.Add(self.button7, proportion=1, flag=wx.GROW | wx.TOP, border=10)
         file.Add(self.button9, proportion=1, flag=wx.GROW | wx.TOP, border=10)
@@ -512,13 +548,15 @@ class MyBrowser(wx.Frame):
             List(self).Show()
         self.combobox_1.SetValue("表・リスト")
 
-    def point(self, _):
-        Point(self).Show()
-
-    def code(self, _):
-        Code(self).Show()
+    def change_text(self, _):
+        if self.combobox_2.GetSelection() == 0:
+            Point(self).Show()
+        else:
+            Code(self).Show()
+        self.combobox_1.SetValue("注意文・コード文")
 
     def save(self, _):
+        global file_path
         soup = BeautifulSoup(open("index.html").read(), 'html.parser')
         nt = BeautifulSoup("<h2>" + self.title.GetValue() + "</h2>", 'html.parser')
         soup.select(".left")[0].append(nt)
@@ -528,6 +566,7 @@ class MyBrowser(wx.Frame):
             dialog = wx.FileDialog(None, '保存', style=wx.FD_SAVE,
                                    wildcard="html File (*.html)|*.html|All Files (*.*)|*")
             if dialog.ShowModal() == wx.ID_OK:
+                file_path = dialog.GetPath()
                 with open(dialog.GetPath(), "w") as f:
                     f.write(str(soup.contents[0]))
         else:
@@ -566,6 +605,9 @@ class MyBrowser(wx.Frame):
 
     def change_zoom(self, _):
         self.browser.SetZoom(self.zoom.GetSelection())
+
+    def midasi(self, _):
+        midasi(self).Show()
 
 
 if __name__ == '__main__':
