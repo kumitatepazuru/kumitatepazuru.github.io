@@ -99,7 +99,7 @@ class midasi(wx.Frame):
         else:
             self.parent.text.Replace(self.parent.text.GetSelection()[0], self.parent.text.GetSelection()[1],
                                      "<h3 class='midasi'>\n\t" + self.title.GetValue() +
-                                     "</h3>")
+                                     "\n</h3>")
             self.close(None)
 
 
@@ -401,7 +401,7 @@ class MyBrowser(wx.Frame):
         self.combobox_2 = wx.ComboBox(self, wx.ID_ANY, '表・リスト', choices=("表の作成", "リストの作成"), style=wx.CB_DROPDOWN)
         self.combobox_2.Bind(wx.EVT_COMBOBOX, self.create_list)
         self.combobox_3 = wx.ComboBox(self, wx.ID_ANY, '注意文・コード文', choices=("注意文の作成", "コード文の作成"), style=wx.CB_DROPDOWN)
-        self.combobox_3.Bind(wx.EVT_COMBOBOX, self.create_list)
+        self.combobox_3.Bind(wx.EVT_COMBOBOX, self.change_text)
         self.button6 = wx.Button(self, wx.ID_ANY, 'ファイルの保存')
         self.button6.Bind(wx.EVT_BUTTON, self.save)
         self.button7 = wx.Button(self, wx.ID_ANY, 'ファイルを開く')
@@ -415,7 +415,7 @@ class MyBrowser(wx.Frame):
         self.text1 = wx.StaticText(self, wx.ID_ANY, '拡大率')
         self.zoom = wx.ComboBox(self, wx.ID_ANY, "MEDIUM", choices=("TINY", "SMALL", "MEDIUM", "LARGE", "LARGEST"),
                                 style=wx.CB_READONLY)
-        self.zoom.Bind(wx.EVT_COMBOBOX, self.change_text)
+        self.zoom.Bind(wx.EVT_COMBOBOX, self.change_zoom)
         zoom.Add(self.text1, proportion=1, flag=wx.GROW)
         zoom.Add(self.zoom, proportion=5, flag=wx.GROW)
 
@@ -546,14 +546,15 @@ class MyBrowser(wx.Frame):
             Table(self).Show()
         else:
             List(self).Show()
-        self.combobox_1.SetValue("表・リスト")
+        self.combobox_2.SetValue("表・リスト")
 
     def change_text(self, _):
-        if self.combobox_2.GetSelection() == 0:
+        print(self.combobox_3.GetSelection())
+        if self.combobox_3.GetSelection() == 0:
             Point(self).Show()
         else:
             Code(self).Show()
-        self.combobox_1.SetValue("注意文・コード文")
+        self.combobox_3.SetValue("注意文・コード文")
 
     def save(self, _):
         global file_path
@@ -596,7 +597,7 @@ class MyBrowser(wx.Frame):
     def img(self, _):
         dialog = wx.FileDialog(None, '画像の選択', style=wx.FD_OPEN,
                                wildcard="All Files (*.*)|*")
-        if dialog.ShowModel() == wx.ID_OK:
+        if dialog.ShowModal() == wx.ID_OK:
             self.text.Replace(self.text.GetSelection()[0], self.text.GetSelection()[1],
                               "<img src='" + dialog.GetPath() + "' width=100% vspace='10'>" + self.text.GetStringSelection())
 
