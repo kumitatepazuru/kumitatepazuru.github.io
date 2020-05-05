@@ -1,0 +1,114 @@
+<html>
+
+<head>
+    <title>cszp Easy soccer execution program WIKI | start・test・loopコマンドの使い方(cszp_soccer.py)</title>
+    <meta http-equiv="content-type" charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert&lang=json"></script>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css"/>
+</head>
+
+<body>
+<div id="page">
+    <div class="page_title">
+        <h1 class="title-h1">cszp Easy soccer execution program WIKI</h1>
+        <h2 class="description">robocup2Dシュミレーションリーグの自動実行プログラムのwikiです。</h2>
+    </div>
+<div class="left">
+<h2>start・test・loopコマンドの使い方(cszp_soccer.py)</h2>
+<div class="checkdiv">
+<span class="divtitle">POINT</span>
+<p>このwikiはcszp4.5.0以降を基準に作られています。4.5.0以前のバージョンを使っている方はバージョンアップをしてください。</p>
+</div>
+<p>今回は、cszpの使い方のstart・test・loopコマンドの使い方について説明しようと思います。<br/>cszpは対話式の実行システムにしているので実行も質問を答えるだけですごく簡単に実行することができます。では見ていきましょう！</p>
+<h3 class="midasi">1.設定確認(各コマンド共通)</h3>
+<img src="usage2/usage1.png" vspace="10" width="100%"/>
+<p>まずは設定確認です。設定に問題がないか確認しましょう。もし、問題がある場合はcancelを選択してmenu画面に戻って再設定してください。<br/>選ぶのは矢印キーとTabキー・スペースキーあと、マウスクリックが使えます。</p>
+<h3 class="midasi">
+	2.Team1(黄色)チームのパスを選択(各コマンド共通)
+</h3>
+<img src="usage2/usage2.png" vspace="10" width="100%"/>
+<p>次にTeam1の黄色チームのパスを選択します。<br/>もし、cszpの簡単サッカー実行リスト（後述）に選手を登録している場合はYesを選んで3へ進んでください。<br/>登録していない場合はNoを選んで3.5へ進んでください。<br/>また、変更をしたくなった場合はCancelを選択すると一つ前の画面に戻れます。<br/>選び方は先程と変わりません。</p>
+<h3 class="midasi">
+	3.簡単サッカー実行リストから選択
+</h3>
+<div class="checkdiv">
+<span class="divtitle">POINT</span>
+<p>もし、以下のような表示がされたときは選手がリストに設定されていません。Okを押してファイルから実行プログラムを選択するかCancelを押して再設定し直してください。</p>
+<img src="usage2/usage3.png" vspace="10" width="100%"/>
+</div>
+<img src="usage2/usage4.png" vspace="10" width="100%"/>
+<p>スペースキーで選択ができます。できたら、Tabを押してOkを選択してください。この部分はマウスが反応します。</p>
+<h3 class="midasi">
+	3.5.ファイルから選択
+</h3>
+<div class="checkdiv">
+<span class="divtitle">POINT</span>
+<p>もし、以下のような画面が表示された場合は画面のサイズが小さいので大きくするか、フォントの大きさを小さくしてください。</p>
+<img src="usage2/usage5.png" vspace="10" width="100%"/>
+</div>
+<img src="usage2/usage6.png" vspace="10" width="100%"/>
+<p>方向キーでファイルを選択してください。この画面ではマウスは使用できないので注意してください。qキーを押すと選択方法を変更・再設定ができます。また、F4キーまたはCtrl+FまたはCommand+Fで検索ができます。</p>
+<h3 class="midasi">
+	4.Team2(赤色)チームのパスを選択(各コマンド共通)
+</h3>
+<p>黄色チームの設定と同じやり方でやってください。</p>
+<h3 class="midasi">
+	5.サーバーの引数を入力(各コマンド共通)
+</h3>
+<img src="usage2/usage7.png" vspace="10" width="100%"/>
+<p>サーバーの引数を入力してください。もしない場合は空欄でOkを選択してください。また、synchモードの引数は自動入力してくれるので大丈夫です。</p>
+<h3 class="midasi">
+	6.各種設定(各コマンド共通)
+</h3>
+<img src="usage2/usage8.png" vspace="10" width="100%"/>
+<img src="usage2/usage9.png" vspace="10" width="100%"/>
+<img src="usage2/usage10.png" vspace="10" width="100%"/>
+<img src="usage2/usage11.png" vspace="10" width="100%"/>
+<p>各種設定です。必要に応じて選択してください。</p>
+<h3 class="midasi">
+	7.csvのファイル名を指定(各コマンド共通・csvログ保存モードのみ)
+</h3>
+<img src="usage2/usage12.png" vspace="10" width="100%"/>
+<p>csvログの保存をYesにした場合のみ表示される画面です。保存する名前を指定してください。</p>
+<h3 class="midasi">
+	8.loop回数を指定(loopコマンド実行時のみ)
+</h3>
+<img src="usage2/usage13.png" vspace="10" width="100%"/>
+<p>loopコマンド実行時のみに表示されます。ループ回数を半角で設定してください。</p>
+<h3 class="midasi">
+	9.確認(各コマンド共通)
+</h3>
+<img src="usage2/usage14.png" vspace="10" width="100%"/>
+<p>最後の確認です。問題がないか確認してください。問題がなければYesを選択してください。</p>
+<h3 class="midasi">
+	10.実行(各コマンド共通)
+</h3>
+<div class="checkdiv">
+<span class="divtitle">POINT</span>
+<p>もし以下のような画面が表示されたら、プログラムがおかしいまたはパスが間違っています。確認をしてください。</p>
+</div>
+<img src="usage2/usage15.png" vspace="10" width="100%"/>
+<p>実行をします。以下のような状態になったら終了しています。Enterキーを押してホーム画面に戻ってください。</p>
+<p>これでstart・test・loopコマンドの使い方はマスターですw。少し雑に書きましたが、見やすいGUIで分かりやすかったと思います。次は、setting画面の紹介をしようと思います。それでは！</p></div>
+<div id="right">
+<script>
+            var text = "<ul>"
+            $.getJSON('./content.json') // json読み込み開始
+                .done(function(json){ // jsonの読み込みに成功した時
+                    for(i=0;i<json.length;i++){
+                        text += "<li><a href='"+json[i].link+"'>"+json[i].text+"</a></li>"
+                    }
+                    text += "</ul>"
+                    document.getElementById("right").innerHTML = text;
+                });
+
+
+        </script>
+</div>
+</div>
+</body>
+</html>
