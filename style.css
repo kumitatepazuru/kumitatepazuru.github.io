@@ -8,7 +8,7 @@
   background: repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
 }
 
-h1 {
+h1:not(.title-h1) {
   border-bottom: solid 3px skyblue;
   position: relative;
 }
