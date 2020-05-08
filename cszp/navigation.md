@@ -1,6 +1,7 @@
 # cszp Easy soccer execution program WIKI
 [wiki]()
 
+  * [Home](index.md)
   * [インストール](install.md)
   * [プラグインの作り方](plugin1.md)
   * [基本的な使い方(cszp_menu.py)](usage1.md)
