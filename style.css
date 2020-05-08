@@ -13,7 +13,7 @@ h1:not(.title-h1) {
   position: relative;
 }
 
-h1:after:not(.title-h1) {
+h1:not(.title-h1)after {
   position: absolute;
   content: " ";
   display: block;
