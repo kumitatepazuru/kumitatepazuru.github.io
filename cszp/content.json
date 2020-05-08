@@ -1,0 +1,22 @@
+[
+    {
+        "text":"ホーム",
+        "link":"./index.html"
+    },
+    {
+        "text":"インストール",
+        "link":"./install.html"
+    },
+    {
+        "text":"基本的な使い方",
+        "link":"./usage1.html"
+    },
+	{
+	    "text":"start・test・loopコマンドの使い方(cszp_soccer.py)",
+	    "link":"usage2.html"
+	},
+    {
+        "text":"プラグインの作り方",
+        "link":"./plugin1.html"
+    }
+]
