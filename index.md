@@ -3,10 +3,10 @@
 
 ------
 
-### kumitatepazuruのリポジトリの情報を出しています。
+#### kumitatepazuruのリポジトリの情報を出しています。
 <br><br>
 
-### 使わせていただいたソフトウェアたち
+### 謝辞
 
 これがなくてはこのウェブサイトを運営することは不可能でした。本当にありがとうございます。
 
@@ -17,6 +17,7 @@
 | github| https://github.com/            |
 | github pages| https://pages.github.com/      |
 | HTML - Markdown 変換 | https://pronama.jp/md/         |
+| Gitkraken | https://www.gitkraken.com/ |
 
 ### お知らせ
 
