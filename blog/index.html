@@ -122,7 +122,12 @@
 
     @font-face {
         font-family: 'azuki';
-        src: url("../APJapanesefontT.otf") format('opentype');
+        src: url("../fonts/APJapanesefontT.otf") format('opentype');
+    }
+
+    @font-face {
+        font-family: 'jkg';
+        src: url("../fonts/JKG-L_3.ttf") format('truetype');
     }
     </style>
 
@@ -292,8 +297,11 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
             border-bottom: none !important;
         }
 
-        h1,h2,h3,h4,h5,h6,span,a,p,table,ul,li {
+        h1,h2,h3,h4,h5,h6,.navbar-brand,.nav a {
             font-family: "azuki" !important;
+        }
+        span,a,p,table,ul,li {
+            font-family: "jkg" !important;
         }
         #md-body span,#md-body a,#md-body p,#md-body table,#md-body ul,#md-body li {
             font-size: 18px;

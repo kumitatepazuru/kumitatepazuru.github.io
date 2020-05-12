@@ -1,4 +1,4 @@
-# Robocup soccer 2D jyosen team blog
+# kumitatepazuru's blog
 [Content]()
 
   * [Home](index.md)
