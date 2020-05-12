@@ -1,4 +1,4 @@
-# kumitatepazuruのgithub
+# kumitatepazuru's github
 色々やってます。robocup soccer 2Dのzyosenチームに入っています。
 
 ------

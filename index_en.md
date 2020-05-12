@@ -1,4 +1,4 @@
-# github of kumitatepazuru
+# kumitatepazuru's github
 
 I do various things. I am in the zyosen team of robocup soccer2D.
 
