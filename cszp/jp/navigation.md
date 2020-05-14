@@ -7,7 +7,11 @@
   * [start・test・loopコマンドの使い方(cszp_soccer.py)](usage2.md)
   * [プラグインの作り方](plugin1.md)
 
-[kumitatepazuru's github](../../#!index.md)
-[kumitatepazuru's blog](../../blog/#!index.md)
-[Robocup soccer 2D jyosen team blog](../../jyo_sen/#!index.md)
+[Links]()
+
+  * [kumitatepazuru's github](../../#!index.md)
+  * [kumitatepazuru's blog](../../blog/#!index.md)
+  * [Robocup soccer 2D jyosen team blog](../../jyo_sen/#!index.md)
+  * [libscips WIKI](../../libscips/jp/#!index.md)
+  
 [gimmick:theme](cosmo)
