@@ -14,7 +14,7 @@
 
 それで、今回参考にさせていただいたサイトは[こちら](https://qiita.com/ai230/items/59442d7c7bd076e9fa62)。
 
-```html
+```
 <div id="loader-bg">
   <div id="loader">
   　<img src="images/load.gif" alt="Loading..." />
@@ -83,7 +83,7 @@ body {
 
 こうして...
 
-```html
+```
 <div id="loader-bg">
   <div id="loader">
   　<img src="images/load.gif" alt="Loading..." />
@@ -131,7 +131,7 @@ body {
 
 こうして...
 
-```html
+```
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ConnorAtherton/loaders.css/master/loaders.min.css">
 --- 中略 ---
 <div id="loader-bg">
@@ -144,7 +144,7 @@ body {
 
 こうして...
 
-```html
+```
 <div id="loader-bg">
     <div id="loader">
         <h1>Kumitatepazuru's Blog</h1><br>
