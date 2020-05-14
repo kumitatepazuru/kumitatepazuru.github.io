@@ -56,6 +56,10 @@ Robocupという大会のシュミレーションリーグのzyosenチームに�
 
 ## 最後に
 
-質問等はこちらへ
+質問等はこちらまで。
 
-[issues](https://github.com/kumitatepazuru/kumitatepazuru.github.io/issues)
+https://forms.gle/V6NRhoTooFw15hJdA
+
+また、自分が参加しているRobocup soccer シミュレーションリーグのチームでは参加者募集中です！活動の見学、活動に参加したい方、ご連絡お待ちしております！
+
+[詳しくはこちら](https://kumitatepazuru.github.io/jyo_sen/jp/#!contents/profile.md)
