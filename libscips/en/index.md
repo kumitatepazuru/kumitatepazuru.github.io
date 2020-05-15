@@ -1,5 +1,5 @@
 # libscips WIKI
-### Click [here](https://kumitatepazuru.github.io/libscips/en/#!index.md) for the English page.
+### 日本語ページは [こちら](https://kumitatepazuru.github.io/libscips/jp/#!index.md)
 
 ### This site uses machine translation. I am not responsible for any damage caused by translation errors.
 

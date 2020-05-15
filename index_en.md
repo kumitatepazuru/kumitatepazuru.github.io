@@ -32,6 +32,9 @@ I couldn't have run this website without it. Thank you very much.
 
 | Date       | Info                                           |
 | :--------- | :--------------------------------------------- |
+| 2020/05/15 |Added content to kumitatepazuru's blog.                 |
+|  2020/05/14 |create page libscips WIKI.                |
+| 2020/05/13 |Added content to kumitatepazuru's blog.                 |
 | 2020/05/12 |Added content to kumitatepazuru's blog.                 |
 | 2020/05/12 |create page kumitatepazuru's blog.                 |
 | 2020/05/09 | Published cszp 4.5.1.3 4.5.1.4.                |

@@ -3,6 +3,7 @@
 
   * [Home](index.md)
   * [インストールと使い方](usage1.md)
+  * [player.player_signal](usage2.md)
 
 [Links]()
 

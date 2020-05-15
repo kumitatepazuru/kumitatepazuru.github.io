@@ -25,9 +25,9 @@ cd libscips
 使いたいファイルに以下のimport文を**一番最初に**入れてください。
 
 ```python
-import libscips
+from libscips import *
 ```
 
 これからはこの文が入っていることを前提として解説します。
 
-次は、signal.player_signalを解説しようと思います。
+次は、player.player_signalを解説しようと思います。

@@ -29,6 +29,8 @@
 
 | Date       | Info                                               |
 | :--------- | :------------------------------------------------- |
+| 2020/05/15 |kumitatepazuru's blogにコンテンツを追加しました。                 |
+| 2020/05/14 |libscips WIKI を開設しました。                 |
 | 2020/05/13 |kumitatepazuru's blogにコンテンツを追加しました。                 |
 | 2020/05/12 |kumitatepazuru's blogにコンテンツを追加しました。                 |
 | 2020/05/12 |kumitatepazuru's blogを開設しました。                 |

@@ -4,6 +4,7 @@
   * [Home](index.md)
   * [はじめまして](hi.md)
   * [Blog](index.md#Blog)
+  * [libscips](index.md#Blog)
 
 [Links]()
 
