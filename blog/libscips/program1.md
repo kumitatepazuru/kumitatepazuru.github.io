@@ -452,7 +452,7 @@ def recieve_msg(self, log=None):
 	"hello":"jobs"
 	},
 	[
-	"contents":"program1.md"
+	"contents"
 	]
 ]
 ```
