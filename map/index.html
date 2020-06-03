@@ -198,7 +198,7 @@ input[type="text"]:hover {
 	    return decodeURIComponent(results[2].replace(/\+/g, " "));
 	}
 	$('<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=">'+getParam("key")+"<script"+">").prependTo('#mapview');
-	if (getParam("key") == null || getParam("key") == ""){
+	if (getParam("key") == null || getParam("key") == "" || getParam("key") == "null"){
 		// 入力ダイアログを表示 ＋ 入力内容を user に代入
 		key = window.prompt("googlemapsapiキーを入力（よくわからない方は使い方を確認してください。）", "");
 
