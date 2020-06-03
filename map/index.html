@@ -1,0 +1,417 @@
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<!-- BootstrapのCSS読み込み -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery読み込み -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- BootstrapのJS読み込み -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<title>map</title>
+<style>
+body {
+    overflow-y:hidden;
+    font-size:20px;
+}
+#left {
+    max-height: calc(100vh - 50px);
+}
+
+#map {
+	height: 100vh;
+}
+
+input[type="text"] {
+	outline: none;
+	border: 1px solid #aaa;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    font-size: 17px;
+    color: #0088dd;
+    border-radius: 3px;
+    background: #ffffff;
+}
+
+input[type="text"]:focus{
+	box-shadow: 0 0 7px #1abc9c;
+	border: 1px solid #1abc9c;
+}
+
+input[type="button"]:enabled{
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    font-size: 17px;
+    color: #0088dd;
+    border: solid 2px #67c5ff;
+    border-radius: 3px;
+    transition: .4s;
+    background: #ffffff;
+}
+
+input[type="button"]:disabled{
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    font-size: 17px;
+    color: #0088dd;
+    border: solid 2px #67c5ff;
+    border-radius: 3px;
+    transition: .4s;
+    background: #ff0000a1;
+}
+
+input[type="button"]:hover:not(.remove) {
+    background: #67c5ff;
+    color: white;
+    }
+
+input[type="text"]:hover {
+    background: #1abc9c9f;
+    color: rgb(94, 94, 94);
+}
+
+.remove[type="button"]:hover{
+    background: #ff0000a1;
+}
+
+.kakomu {
+    margin: 2em 0;
+    background: #f1f1f1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.22);
+}
+.kakomu .title {
+    font-size: 1.2em;
+    background: #5fc2f5;
+    padding: 4px;
+    text-align: center;
+    color: #FFF;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+.kakomu p span {
+    padding: 15px 20px;
+    margin: 0;
+}
+
+.setting{
+    margin:1em 0;
+    position: relative;
+    padding: 0.5em 1.5em;
+    border-top: solid 2px black;
+    border-bottom: solid 2px black;
+}
+.setting:before, .setting:after{
+    content: '';
+    position: absolute;
+    top: -10px;
+    width: 2px;
+    height: -webkit-calc(100% + 20px);
+    height: calc(100% + 20px);
+    background-color: black;
+}
+.setting:before {left: 10px;}
+.setting:after {right: 10px;}
+.setting p {
+    margin: 0; 
+    padding: 0;
+}
+.kaigyou {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.overlay {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    display: inline-block;
+    margin-top: 80px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    position: relative;
+    transition: all 5s ease-in-out;
+  
+}
+
+.popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 27px;
+}
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+    overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+</style>
+</head>
+<body id="body">
+<div id="map" class="col-xs-4 col-sm-6 col-md-8 col-lg-9"></div>
+<script>
+	function getParam(name, url) {
+	    if (!url) url = window.location.href;
+	    name = name.replace(/[\[\]]/g, "\\$&");
+	    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		results = regex.exec(url);
+	    if (!results) return null;
+	    if (!results[2]) return '';
+	    return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+	$('<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=">'+getParam("key")+"<script"+">").prependTo('#mapview');
+	if (getParam("key") == null || getParam("key") == ""){
+		// 入力ダイアログを表示 ＋ 入力内容を user に代入
+		key = window.prompt("googlemapsapiキーを入力（よくわからない方は使い方を確認してください。）", "");
+
+		location.href = "index.html?key="+key;
+
+		// 空の場合やキャンセルした場合は警告ダイアログを表示
+		if (key == null || getParam("key") == ""){
+
+			window.alert('Canceled');
+			CloseWindow();
+
+		}
+	}
+    var map;
+
+    function markers(t,lat,lng,toho,address){
+        document.getElementById( t+"_lat" ).value = lat ;
+        document.getElementById( t+"_lng" ).value = lng ;
+        var textd =  (t+1).toString(10);
+        if (marker[t] != null){
+            marker[t].setMap(null);
+            circle[t].setMap(null);
+        }
+        var latlng = new google.maps.LatLng(lat,lng);
+        marker[t] = new google.maps.Marker({
+            map: map,
+            position: latlng,
+            animation: google.maps.Animation.DROP,
+            icon: {
+                fillColor: "#FF0000",                //塗り潰し色
+                fillOpacity: 0.8,                    //塗り潰し透過率
+                path: google.maps.SymbolPath.CIRCLE, //円を指定
+                scale: 16,                           //円のサイズ
+                strokeColor: "#FF0000",              //枠の色
+                strokeWeight: 1.0                    //枠の透過率
+            },
+            label: {
+                text: textd,                           //ラベル文字
+                color: '#FFFFFF',                    //文字の色
+                fontSize: '20px'                     //文字のサイズ
+            }
+        });
+        console.log(address)
+        //textd = "<div>"+document.getElementById(t+"_address").innerHTML+"</div>"
+        textd = '<div class="sample">'+address+'</div>'
+        infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
+            content:  textd// 吹き出しに表示する内容
+         });
+        circle[t] = new google.maps.Circle({
+            center:latlng ,
+            map: map ,
+            radius: parseInt(80*toho) ,	// 半径（m）
+            fillColor: "#1da8ff", 		// 塗りつぶし色
+            fillOpacity: "0",		// 塗りつぶし透過度（0: 透明 ⇔ 1:不透明）
+            strokeColor: "#ff0040",		// 外周色
+            strokeOpacity: "1",	// 外周透過度（0: 透明 ⇔ 1:不透明）
+            strokeWeight: "4"		// 外周太さ
+        });
+        circle[t].addListener( "click",function ( argument ) {
+            if (nuri[t] == 1){circle[t].setOptions({fillOpacity:"0"});nuri[t] = 0}else{circle[t].setOptions({fillOpacity:"0.5"});nuri[t] = 1}
+        });
+    }
+
+    function initMap() {
+        lat = 35.68123620000001;
+        lng = 139.7671248;
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            lat = pos.coords.latitude;
+            lng = pos.coords.longitude;
+        });
+        map = new google.maps.Map(document.getElementById('map'), { // #sampleに地図を埋め込む
+            center: { // 地図の中心を指定
+                lat: lat, // 緯度
+                lng: lng // 経度
+            },
+            sensor:true,
+            zoom: 16, // 地図のズームを指定
+            mapTypeId: google.maps.MapTypeId.HYBRID
+        });
+
+        marker = {};
+        circle = {};
+        google.maps.event.addListener(map, 'click', generatemarker);
+        click = [];
+        nuri = [];
+
+        function generatemarker(event) {
+            if (click.indexOf(1) != -1){
+                var toho = document.getElementById("toho"+click.indexOf(1)).value;
+                markers(click.indexOf(1),event.latLng.lat(),event.latLng.lng(),toho,addressload(event.latLng.lat(),event.latLng.lng(),click.indexOf(1)));
+                click[click.indexOf(1)] = 0;
+                for(var i=0;i<click.length;i++){
+                    document.getElementById("search"+i).disabled = false;
+                    document.getElementById("update"+i).disabled = false;
+                    document.getElementById("setting"+i).disabled = false;
+                }   
+                map.panTo(new google.maps.LatLng(event.latLng.lat(),event.latLng.lng()));
+            }
+        }
+    }
+
+    function nametolatlng(no){
+        var toho = document.getElementById("toho"+no).value;
+        var address =  document.getElementById("name"+no).value;
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': address}, function(results, status){
+            if(status == google.maps.GeocoderStatus.OK) {
+                var lat = results[0].geometry.location.lat();
+                var lng = results[0].geometry.location.lng();
+                markers(no,lat,lng,toho,addressload(lat,lng,no));
+                map.panTo(new google.maps.LatLng(lat,lng));
+            } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS){
+                document.getElementById("zyouhou"+no).innerHTML = "そのような場所は存在しません";
+            }
+        });
+    }
+    
+    r = "不明";
+    temp = r
+    function addressload(lat,lng,no){
+        console.log(lat,lng)
+        var geocoder = new google.maps.Geocoder();
+        
+        geocoder.geocode({'latLng': new google.maps.LatLng(lat,lng)}, function(results, status){
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0].geometry) {
+                    document.getElementById(no+"_address").innerHTML = results[0].formatted_address;
+                    r = results[0].formatted_address;
+                } 
+            } else {
+                    document.getElementById(no+"_address").innerHTML = "不明";
+                }
+        });
+        console.log(r);
+        return r;
+    }
+
+    function kousin(no){
+        var toho = document.getElementById("toho"+no).value;
+        var lat = document.getElementById(no+"_lat").value;
+        var lng = document.getElementById(no+"_lng").value;
+        if (lat != ""){
+            markers(no,lat,lng,toho,document.getElementById(no+"_address").innerHTML);
+            map.panTo(new google.maps.LatLng(lat,lng));
+            document.getElementById("zyouhou"+no).innerHTML = "";
+        } else{
+            document.getElementById("zyouhou"+no).innerHTML = (no+1)+"地点を入力してください";
+        }
+    }
+
+    function mapclick(no){
+        click[no] = 1;
+        document.getElementById("zyouhou"+no).innerHTML = "";
+        for(var i=0;i<click.length;i++){
+            document.getElementById("search"+i).disabled = true;
+            document.getElementById("update"+i).disabled = true;
+            document.getElementById("setting"+i).disabled = true;
+        }
+    }
+
+    function removewindow(no){
+        window.location.href = "#warning";
+        document.getElementsByClassName("removebutton")[0].setAttribute("id",no.toString(10));
+    }
+
+    function remove(){
+        no = Number(document.getElementsByClassName("removebutton")[0].getAttribute("id"));
+        if (marker[no] != null){
+            marker[no].setMap(null);
+            circle[no].setMap(null);
+        }
+        delete click[no];
+        delete nuri[no];
+        let div = document.getElementById('div_'+no);
+        div.removeAttribute("id");
+        while(div.lastChild){
+            div.removeChild(div.lastChild);
+        }
+        window.location.href = "#";
+    }
+
+    function fuyasu(){
+        marker[Object.keys(marker).length] = null;
+        circle[circle.length] = null;
+        click.push(0);
+        nuri.push(0);
+        var newdata = '<div class="kakomu" id="div_'+(Object.keys(marker).length-1)+'">'
+                                  + '<div class="title" id="'+(Object.keys(marker).length-1)+'">地点'+Object.keys(marker).length+'</div>' 
+                                  + '<div style="color:#f00;" id="zyouhou'+(Object.keys(marker).length-1)+'"></div><div class="setting"><p>住所から設定</p><input id="name'+(Object.keys(marker).length-1)+'" type="text"style="margin-right:10px;width:250px;"><input id="search'+(Object.keys(marker).length-1)+'" type="button" value="検索" onclick="nametolatlng('+(Object.keys(marker).length-1)+');"><br><div style="padding-top:10px;"><p style="border-top: dashed 1px #3474ffb0;width=100%;padding-top:10px;">マップをクリックして設定</p></div><input id="setting'+(Object.keys(marker).length-1)+'" type="button" value="設定する" onclick="mapclick('+(Object.keys(marker).length-1)+');"></div>'
+                                  + '<div class="kaigyou"><span>緯度:</span><input id="'+(Object.keys(marker).length-1)+'_lat" type="text" style="width:210px;" readonly></div>'
+                                  + '<div class="kaigyou"><span>経度:</span><input id="'+(Object.keys(marker).length-1)+'_lng" type="text" style="width:210px;"  readonly></div><br>'
+                                  + '<span>住所:</span><span id="'+(Object.keys(marker).length-1)+'_address"></span><br>'
+                                  + '<div class="kaigyou"><span>徒歩:</span><input id="toho'+(Object.keys(marker).length-1)+'" type="text" value="1" style="width:210px;"><span style="margin-right: 15px;">分</span></div><div class="kaigyou"><input id="update'+(Object.keys(marker).length-1)+'" type="button" value="更新" style="margin:0 5px" onclick="kousin('+(Object.keys(marker).length-1)+');"><input class="remove" id="remove'+(Object.keys(marker).length-1)+'" type="button" value="削除" onclick="removewindow('+(Object.keys(marker).length-1)+');"></div>';
+        document.getElementById('left').insertAdjacentHTML('beforeend',newdata);
+    }
+
+</script>
+<div id="mapview">
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&"></script>
+</div>
+<div id="body" class="col-xs-8 col-sm-6 col-md-4 col-lg-3" style="padding: 0 0;">
+    <input type="button" value="比較地点を増やす" onclick="fuyasu();" style="width: 100%;">
+    <div style="overflow-y:auto;"><div id="left" style="padding: 0 5px;"></div></div>
+</div>
+<div id="warning" class="overlay">
+	<div class="popup">
+        <h2>確認</h2>
+        <a class="close" href="#">&times;</a>
+		<div class="content">
+            <p style="color: #ff0000be;">本当に削除しますか？この操作は取り消せません！</p>
+            <input class="removebutton" type="button" value="削除" onclick="remove();">
+		</div>
+    </div>
+</div>
+</body>
+</html>

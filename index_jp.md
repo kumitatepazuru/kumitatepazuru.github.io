@@ -29,6 +29,7 @@
 
 | Date       | Info                                               |
 | :--------- | :------------------------------------------------- |
+| 2020/06/01 |kumitatepazuru's blogを移行しました。詳しくは[こちら](https://kumitatepazuru.hatenablog.com/entry/2020/06/01/blog%E3%82%92%E5%A4%89%E3%81%88%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%283%E5%9B%9E%E7%9B%AE%29)                 |
 | 2020/05/30 |kumitatepazuru's blogにコンテンツを追加しました。                 |
 | 2020/05/15 |kumitatepazuru's blogにコンテンツを追加しました。                 |
 | 2020/05/14 |libscips WIKI を開設しました。                 |

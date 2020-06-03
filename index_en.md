@@ -32,6 +32,7 @@ I couldn't have run this website without it. Thank you very much.
 
 | Date       | Info                                           |
 | :--------- | :--------------------------------------------- |
+| 2020/06/01 | Migrated kumitatepazuru's blog. For more information, see [This is it.] (https://kumitatepazuru.hatenablog.com/entry/2020/06/01/blog%E3%82%92%E5%A4%89%E3%81%88%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%283%E5%9B%9E%E7%9B%AE%29) |
 | 2020/05/30 |Added content to kumitatepazuru's blog.                 |
 | 2020/05/15 |Added content to kumitatepazuru's blog.                 |
 |  2020/05/14 |create page libscips WIKI.                |
