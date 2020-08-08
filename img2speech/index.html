@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>img2speech</title>
+    <link rel="stylesheet" type="text/css" href="style/normalize.css">
+    <link rel="stylesheet" type="text/css" href="style/message.css">
+    <link rel="stylesheet" type="text/css" href="style/main.css">
+    <link rel="stylesheet" type="text/css" href="style/checkbox_style.css">
+    <link rel="stylesheet" type="text/css" href="style/popup.css">
+    <link rel="stylesheet" type="text/css" href="style/slider.css">
+    <link rel="stylesheet" type="text/css" href="style/select.css">
+
+    <script src="https://cdn.rawgit.com/deep-rain/thread/1.0.0/dist/thread.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <script src="js/msg.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/write.js"></script>
+    <script src="js/speech.js"></script>
+</head>
+<body>
+<div id="loader-bg">
+    <div id="loader">
+        <h1 class="animate__animated animate__rubberBand">img2speech</h1>
+        <h4 class="animate__animated animate__backInUp">By kumitatepazuru</h4>
+        <p id="load_msg" class="animate__animated animate__zoomInUp" style="font-size: smaller;">Loading now...</p>
+    </div>
+</div>
+<dev class="container">
+    <div id="title">
+        <h2>IMG2SPEECH</h2>
+    </div>
+</dev>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <button id="setting" style="width: 100%;">設定</button>
+            <button id="help" style="width: 100%;">ヘルプ</button>
+            <button onclick="remove_one_text();" style="width: 100%;">文字消去</button>
+            <button id="search_text" onclick='search_text();' style="width: 100%;">辞書で検索</button>
+            <button onclick='speech();' style="width: 100%;">発音する</button>
+        </div>
+        <div class="col-xl-6 col-lg-7 col-md-10 col-sm-12 col-xs-12">
+            <canvas id="write" height="500px" width="500px">
+                img2speechを使用するには、canvasタグをサポートしたブラウザが必要です。
+                対応ブラウザ：Chrome, Chrome Android, Edge, Firefox 1.5, IE 9, Opera 9, Safari 2, Safari iOS
+            </canvas>
+        </div>
+        <div id="result" class="col-xl-4 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <span id="result-title">情報</span>
+            <div id="result-text"></div>
+        </div>
+    </div>
+</div>
+<div id="message"></div>
+
+<div class="popup" id="popup1" style="display: none;">
+    <div class="content">
+        <div class="content-title">設定</div>
+        <div class="content-content">
+            <div>
+                <input type="checkbox" id="btn-mode" style="width: 100px;">
+                <label for="btn-mode">ダークモード</label><br><p style="color:red;">※リロード後に反映します。</p>
+                <div class="border-top border-bottom" style="padding-top:10px;">
+                    <input type="range" class="slider" id="sdr-time" min="500" max="3000" step="50" /><label
+                        for="sdr-time" id="sdr-time-result"></label><br><label>文字起こしをする速度</label>
+                </div>
+                <div class="border-top border-bottom" style="padding-top:10px;">
+                    <input type="range" class="slider" id="sdr-speed" min="50" max="1500" step="10" /><label
+                        for="sdr-speed" id="sdr-speed-result"></label><br><label>文字認識をする速度<p style="color:red;">※リロード後に反映します。<br>早くすると電池の消耗が早くなり発熱が大きくなります。</p></label>
+                </div>
+                <input type="checkbox" id="btn-notice" style="width: 100px;">
+                <label for="btn-notice">文字起こしの時に通知を出す</label>
+                <div class="border-top border-bottom" style="padding-top:10px;">
+                    <input type="range" class="slider" id="sdr-speech1" min="0" max="100" step="1" /><label
+                        for="sdr-speech1" id="sdr-speech1-result"></label><br><label>発音時の音量</label>
+                </div>
+                <div style="padding-top:10px;">
+                    <input type="range" class="slider" id="sdr-speech2" min="0" max="100" step="1" /><label
+                        for="sdr-speech2" id="sdr-speech2-result"></label><br><label>発音時の発音速度</label>
+                </div>
+                <div class="border-top border-bottom" style="padding-top:10px;">
+                    <input type="range" class="slider" id="sdr-speech3" min="0" max="100" step="1" /><label
+                        for="sdr-speech3" id="sdr-speech3-result"></label><br><label>発音時の発音音程</label>
+                </div>
+                <div style="padding-top:10px;">
+                    <button id="voice" onclick="speech('hello! my name is img2speech.')">発音を試す</button>
+                </div>
+                <div class="border-top border-bottom" style="padding-top:10px;">
+                    <div class="select">
+                    <select id="model_ver" size="1" style="width: 100%">
+                        <option>a0.0.1</option>
+                        <option>b0.0.1</option>
+                    </select>
+                    </div>
+                    <label for="model_ver">モデルのバージョンを指定<p style="color:red;">※リロード後に反映します。<br>開発者向け設定です。変更しないほうが良いでしょう。</p></label>
+                </div>
+            </div>
+        </div>
+        <button class="close" id="close1"><i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+<div class="popup" id="popup2" style="display: none;">
+    <div class="content">
+        <div class="content-title">ヘルプ</div>
+        <div class="content-content">
+            <button id="pp">プライバシーポリシーについて</button>
+            <div class="border-top" style="margin-top: 10px;margin-bottom: 10px"></div>
+            <button id="le">ライセンスについて</button>
+        </div>
+        <button class="close" id="close2"><i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+<div class="popup" id="popup3" style="display: none;">
+    <div class="content">
+        <div class="content-title">プライバシーポリシー</div>
+        <div class="content-content">
+            <h1>プライバシーポリシー</h1>
+            <p>
+                この度はimg2speechを利用していただき有難うございます。このシステムは皆様がより簡単にわかりやすくするためにcookieを使用しています。具体的には以下の部分でcookieを使用しています。<br><br>設定した情報の保存<br><br>
+                この情報は皆様個人のPCのみに保存され、ブラウザセッションを終了した時にすべて破棄されます。お客様の個人情報等が漏洩することはありませんのでご安心ください。</p>
+        </div>
+        <button class="close" id="close3"><i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+<div class="popup" id="popup4" style="display: none;">
+    <div class="content">
+        <div class="content-title">ライセンスについて</div>
+        <div class="content-content">
+            <h1>ライセンス</h1>
+            <p>この度はimg2speechを利用していただき有難うございます。このプログラムはMITライセンスを使用しています。原文、詳細は以下のとおりです。
+                また、alphabet問題のシステム部分にjamsystem株式会社制作のANC単語頻度準拠英和辞典を使用しています。ANC単語頻度準拠英和辞典について著作権等はjamsystem株式会社にあり、kumitatepazuru本人にあるものではありません。<br>Copyright 2020 kumitatepazuru<br>
+                Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+                associated
+                documentation files (the "Software"), to deal in the Software without restriction, including without
+                limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+                of
+                the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+                conditions:<br>
+                The above copyright notice and this permission notice shall be included in all copies or substantial
+                portions of the Software.<br>
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+                LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+                NO
+                EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+                WHETHER IN
+                AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+                USE
+                OR OTHER DEALINGS IN THE SOFTWARE.<br>
+                <br><br>
+                日本語版<br>
+                Copyright (c) 2020 kumitatepazuru<br>
+                以下に定める条件に従い、本ソフトウェアおよび関連文書のファイル（以下「ソフトウェア」）の複製を取得するすべての人に対し、ソフトウェアを無制限に扱うことを無償で許可します。これには、ソフトウェアの複製を使用、複写、変更、結合、掲載、頒布、サブライセンス、および/または販売する権利、およびソフトウェアを提供する相手に同じことを許可する権利も無制限に含まれます。<br>
+                上記の著作権表示および本許諾表示を、ソフトウェアのすべての複製または重要な部分に記載するものとします。<br>
+                ソフトウェアは「現状のまま」で、明示であるか暗黙であるかを問わず、何らの保証もなく提供されます。ここでいう保証とは、商品性、特定の目的への適合性、および権利非侵害についての保証も含みますが、それに限定されるものではありません。
+                作者または著作権者は、契約行為、不法行為、またはそれ以外であろうと、ソフトウェアに起因または関連し、あるいはソフトウェアの使用またはその他の扱いによって生じる一切の請求、損害、その他の義務について何らの責任も負わないものとします。<br>
+            </p>
+        </div>
+        <button class="close" id="close4"><i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+<div class="popup" id="popup5" style="display: none;">
+    <div class="content c100">
+        <div class="content-title">辞書で検索(by weblio)</div>
+        <div class="content-content" style="max-height:initial;height: 100%;overflow:hidden;">
+            <iframe id="weblio" style="width: 100%;height: 100%;"></iframe>
+        </div>
+        <button class="close" id="close5"><i class="fas fa-times"></i></button>
+    </div>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="js/popup.js"></script>
+<script src="js/tensorflow.js"></script>
+</body>
+</html>

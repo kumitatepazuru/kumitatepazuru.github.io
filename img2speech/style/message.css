@@ -1,0 +1,74 @@
+.message_box {
+    position: absolute;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    width: 400px;
+    top: 0;
+    right: 0;
+    animation-name: fade;
+    animation-duration: 5000ms;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+        transform: translate3d(400px, 0, 0);
+    }
+    10% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+    90% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(400px, 0, 0);
+    }
+}
+
+.error {
+    color: #ff7d6e;
+    background: #ffebe9;
+    border-top: solid 10px #ff7d6e;
+}
+
+.warn {
+    color: #f79708;
+    background: #f9f3ec;
+    border-top: solid 10px #febe25;
+}
+
+.ok {
+    color: #00BCD4;
+    background: #e4fcff;
+    border-top: solid 6px #1dc1d6;
+}
+
+.info {
+    color: #7EBA03;
+    background: #F3F9E8;
+    border-top: solid 6px #BEDC81;
+}
+
+.message_box p {
+    margin: 0;
+    padding: 0;
+}
+
+.box {
+    padding: 0.5em 1em;
+    font-weight: bold;
+    border: solid 3px #000000;
+}
+
+.box p {
+    margin: 0;
+    padding: 0;
+}

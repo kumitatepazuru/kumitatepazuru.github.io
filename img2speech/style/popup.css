@@ -1,0 +1,114 @@
+.content-content {
+    width: 100%;
+    max-height: 505px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.light-theme .content {
+    border-radius: 10px 10px 10px 10px;
+    min-width: 400px;
+    max-width: 550px;
+    max-height: 550px;
+    position: relative;
+    margin: 2em 0;
+    background: #fff;
+
+}
+
+.popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.dark-theme .content {
+    border-radius: 10px 10px 10px 10px;
+    min-width: 400px;
+    max-width: 550px;
+    max-height: 550px;
+    position: relative;
+    margin: 2em 0;
+    background: #212121;
+}
+
+.content .content-title {
+    border-bottom: solid 2px #000;
+    font-size: 25px;
+    padding: 4px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    height: 45px;
+}
+
+.content p {
+    padding: 15px 20px;
+    margin: 0;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.dark-theme .close {
+    color: #fff !important;
+}
+
+.light-theme .close {
+    color: #000 !important;
+}
+
+#title {
+    font-size: 24px;
+    position: relative;
+    padding: 10px 0 2px 28px;
+    border-bottom: 2px solid #d14;
+}
+
+.light-theme #title {
+    color: #444;
+}
+
+.dark-theme #title {
+    color: #fff;
+}
+
+#title:before, #title:after {
+    content: "";
+    position: absolute;
+    margin: auto;
+}
+
+#title:before {
+    width: 12px;
+    height: 12px;
+    top: 0;
+    left: 14px;
+    background: #d14;
+    transform: rotate(50deg);
+}
+
+#title:after {
+    width: 8px;
+    height: 8px;
+    top: 18px;
+    left: 6px;
+    background: #d14;
+    transform: rotate(20deg);
+}
+
+.c100 {
+    max-width: initial !important;
+    max-height: initial !important;
+    width: 80%;
+    height: 80%;
+}
