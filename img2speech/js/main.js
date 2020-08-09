@@ -33,7 +33,7 @@ window.onload = function () {
     for (const c of cookiesArray) { //一つ一つ取り出して
         const cArray = c.split('='); //さらに=で分割して配列に
         if (cArray[0] === 'dark') { // 取り出したいkeyと合致したら
-            ok = 1;
+            ok += 1;
             const btn = document.getElementById("btn-mode");
             if (cArray[1] === "1") {
                 // ダークモード
@@ -50,36 +50,47 @@ window.onload = function () {
         } else if (cArray[0] === "slider_time_value") {
             slidertime.value = cArray[1]
             conf[1] = cArray[1];
+            ok += 1;
         } else if (cArray[0] === "slider_speed_value") {
             sliderspeed.value = cArray[1]
             conf[2] = cArray[1];
+            ok += 1;
         } else if (cArray[0] === "notice"){
             const btn2 = document.getElementById("btn-notice");
-            btn2.checked = true;
+            if (cArray[1] == "on"){
+                btn2.checked = true;
+            } else {
+                btn2.checked = false;
+            }
+            ok += 1;
             conf[3] = cArray[1];
         } else if (cArray[0] === "speech1"){
             sliderspeech1.value = cArray[1];
             conf[4] = cArray[1];
+            ok += 1;
         } else if (cArray[0] === "speech2"){
             sliderspeech2.value = cArray[1];
             conf[5] = cArray[1];
+            ok += 1;
         } else if (cArray[0] === "speech3"){
             sliderspeech3.value = cArray[1];
             conf[6] = cArray[1];
+            ok += 1;
         } else if (cArray[0] === "model_ver"){
             model_ver_select.selectedIndex = cArray[1];
             conf[7] = cArray[1];
+            ok += 1;
         }
     }
-    if (ok === 0) {
+    if (ok != 8) {
         document.cookie = "dark=0";
         document.cookie = "slider_time_value=2000";
         document.cookie = "slider_speed_value=500";
-        document.cookie = "notice="+conf[3]
+        document.cookie = "notice=off";
         document.cookie = "speech1=100";
         document.cookie = "speech2=50";
         document.cookie = "speech3=50";
-        document.cookie = "model_ver="+model_ver.length-1;
+        document.cookie = "model_ver="+(model_ver.length-1).toString();
 
         darkModeMediaQuery.addListener((e) => {
             const darkModeOn = e.matches;

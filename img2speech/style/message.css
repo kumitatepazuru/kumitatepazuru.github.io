@@ -11,13 +11,12 @@
     animation-iteration-count: 1;
     animation-direction: normal;
     animation-fill-mode: forwards;
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
 }
 
 @keyframes fade {
     0% {
         opacity: 0;
-        transform: translate3d(400px, 0, 0);
+        transform: translate3d(0, -100px, 0);
     }
     10% {
         opacity: 1;
@@ -29,32 +28,36 @@
     }
     100% {
         opacity: 0;
-        transform: translate3d(400px, 0, 0);
+        transform: translate3d(0, -100px, 0);
     }
 }
 
 .error {
     color: #ff7d6e;
     background: #ffebe9;
-    border-top: solid 10px #ff7d6e;
+    box-shadow: 0 3px 4px #ff7d6e;
+    border-left: solid 10px #ff7d6e;
 }
 
 .warn {
     color: #f79708;
     background: #f9f3ec;
-    border-top: solid 10px #febe25;
+    box-shadow: 0 3px 4px #febe25;
+    border-left: solid 10px #febe25;
 }
 
 .ok {
     color: #00BCD4;
     background: #e4fcff;
-    border-top: solid 6px #1dc1d6;
+    box-shadow: 0 3px 4px #1dc1d6;
+    border-left: solid 6px #1dc1d6;
 }
 
 .info {
     color: #7EBA03;
     background: #F3F9E8;
-    border-top: solid 6px #BEDC81;
+    box-shadow: 0 3px 4px #BEDC81;
+    border-left: solid 6px #BEDC81;
 }
 
 .message_box p {
