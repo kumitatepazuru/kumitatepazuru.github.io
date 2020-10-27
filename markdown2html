@@ -1,0 +1,8 @@
+<script type="text/javascript" src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+<div id="a"></div>
+<script>
+var text = "#見出し\n- リスト\n- リスト";
+var converter = new Showdown.converter();
+var html = converter.makeHtml(text);
+Document.gentelementById("a").innerHTML = html;
+</script>
